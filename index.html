@@ -15,7 +15,12 @@
 		<link href="assets/css/custom.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,500italic,400italic,700italic' rel='stylesheet' type='text/css'>
-		<?php get_header(); ?>
+		<?php require('../wp-blog-header.php');
+
+		 /*if you are getting 404 errors uncomment the next 2 lines*/
+		    //status_header(200);
+		    //nocache_headers();
+		?>
 	</head>
 
 <body>
@@ -85,11 +90,14 @@
 						<h3>Company Message Board</h3>
 					</div>
 					<div class="msg-box">
-					<p>2/11/2016</p>
-					<h4>Title Of Message</h4>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean at blandit eros. Nam ut magna in nisl luctus rutrum. Duis magna dui, iaculis nec interdum vel, fringilla ac ligula. Vestibulum malesuada turpis a erat tempor, non venenatis lorem mattis. Sed porta eleifend ligula, sit amet pretium purus consequat id. Vivamus blandit nibh eu massa volutpat, dictum rhoncus risus ultricies. Curabitur id diam ac diam convallis varius eget sed nunc. Integer a accumsan lectus. Sed consectetur tristique dolor eu ullamcorper. In rhoncus mi ex, et pellentesque turpis auctor a. Morbi sit amet velit vestibulum, sagittis metus vitae, iaculis ipsum. Vestibulum nec consectetur nisl, quis dignissim lacus. Integer sed purus ac tortor sollicitudin mattis. Ut eu vulputate nunc, ut ultrices lorem. Sed ut dolor vulputate, faucibus nibh a, venenatis nunc.
-					</p>
-
+						<?php
+							$args = array( 'numberposts' => 1, 'post_status'=>"publish",'post_type'=>"post",'orderby'=>"post_date");
+							$postslist = get_posts( $args );
+							 foreach ($postslist as $post) :  setup_postdata($post); ?>
+							 <p><?php the_date(); ?><p>
+							 <h4><a href="<?php the_permalink(); ?>" title="<?php the_title();?>"> <?php the_title(); ?></a></h4>
+							 <p><?php the_excerpt();?></p>
+							<?php endforeach; ?>
 					</div>
 				</div>
 				<div class="col-sm-6" id="news-area">

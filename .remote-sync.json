@@ -1,0 +1,15 @@
+{
+  "transport": "ftp",
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "adamdtechnology.com",
+  "target": "/public_html/clients",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "adamdtec",
+  "watch": [],
+  "password": "tUMI,$bX2yUk"
+}
